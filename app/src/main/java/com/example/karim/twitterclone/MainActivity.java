@@ -1,19 +1,24 @@
 package com.example.karim.twitterclone;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView img;
     private TextView text_massege;
+    private Button signin,signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +40,25 @@ public class MainActivity extends AppCompatActivity {
             text_massege.setText("Night Mood");
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+
+        signin=findViewById(R.id.signin);
+        signup=findViewById(R.id.signup);
+        signin.setOnClickListener(this);
+        signup.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case (R.id.signup):
+                Intent intent = new Intent(this,SignUp.class);
+                startActivity(intent);
+                finish();
+                break;
+            case (R.id.signin):
+                Toast.makeText(this,"NOT have Data",Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
