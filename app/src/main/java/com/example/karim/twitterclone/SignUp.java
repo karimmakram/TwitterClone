@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import java.util.Calendar;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
@@ -75,18 +77,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                         if(dm.insert(et_name.getText().toString(), et_username.getText().toString(), et_pass.getText().toString()))
                         {
                             show(dm.getALL());
-                            Toast.makeText(this, "userAdd", Toast.LENGTH_SHORT).show();
+                            FancyToast.makeText(this, "userAdd", Toast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                             et_name.setText("");
                             et_username.setText("");
                             et_pass.setText("");
                             et_confirm_pass.setText("");
                         }
                         else {
-                            Toast.makeText(this, "username Exits", Toast.LENGTH_SHORT).show();
+                            FancyToast.makeText(this, "username Exits", Toast.LENGTH_SHORT,FancyToast.WARNING,false).show();
                         }
                         }
                      else {
-                        Toast.makeText(this, "Confirm password first", Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(this, "Confirm password first", Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
                     }
                     break;
                 }

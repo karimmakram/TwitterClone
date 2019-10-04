@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -77,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                     if (i==0)
-                     Toast.makeText(this,"You mush have Account",Toast.LENGTH_SHORT).show();
+                     FancyToast.makeText(this,"You mush have Account",Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
                     else {
-                        Toast.makeText(this, "password failed", Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(this, "password failed", Toast.LENGTH_SHORT,FancyToast.ERROR,false).show();
                         i=0;
                     }
 
