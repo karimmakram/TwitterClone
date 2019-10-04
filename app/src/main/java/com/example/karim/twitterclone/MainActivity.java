@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case (R.id.signin):
                 if (chick_Password(dm.serch(et_username.getText().toString()))) {
                     setCurrentuser(dm.serch(et_username.getText().toString()));
-                    Toast.makeText(this, "Welcome "+curerntUser.getName(), Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent_user = new Intent(this,user_Activity.class);
+                    startActivity(intent_user);
+
                 }
                 else
                     if (i==0)

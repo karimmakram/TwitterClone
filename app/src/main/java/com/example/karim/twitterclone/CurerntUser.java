@@ -1,10 +1,11 @@
 package com.example.karim.twitterclone;
 
 public class CurerntUser {
-    private String Name ;
-    private String Username ;
-    private int Id ;
+    private static String Name ;
+    private static String Username ;
+    private static int Id ;
 
+    CurerntUser(){}
     CurerntUser(int id,String name,String usernaem){
         Name =name ;
         Username = usernaem;
