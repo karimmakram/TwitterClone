@@ -53,12 +53,13 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_email"
             android:hint="username"
-            android:textColorHint="#ffffff"
             android:textColor="#ffffff"
-            android:drawableEnd="@drawable/ic_email"/>
+            android:textColorHint="#ffffff" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -74,10 +75,12 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_lock"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff" />
     </android.support.design.widget.TextInputLayout>
