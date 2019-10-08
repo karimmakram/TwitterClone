@@ -10,7 +10,7 @@ public class DBMS {
     private SQLiteDatabase db;
 
     private static final String DB_name = "TwitterClone";
-    private static final int DB_version = 3;
+    private static final int DB_version = 4;
     private static final String table_name = "users";
 
 
@@ -119,10 +119,45 @@ public Boolean insertFollow(String follower , String follow){
         }
     }
 
+////////////////////////// Table Post ///////////////////////////
+
+    private static final String table_name_post = "Post";
+
+    public static final String row_post_id = "id";
+    public static final String row_post_username = "username";
+    public static final String row_post_des = "postDes";
+    private static final String DATABASE_CREATE_Post =
+            "CREATE TABLE IF NOT EXISTS "+table_name_post+"("+
+                    row_post_id+" integer primary key autoincrement,"+
+                    row_post_username+" text not null,"+
+                    row_post_des+" text not null,"+
+                    "FOREIGN KEY ("+row_post_username+")"+" REFERENCES "+table_name+"( "+row_username+"));";
 
 
+    public Boolean add_post(String username , String des){
+        String query = "insert into "+table_name_post
+                +" ("+row_post_username+"," +row_post_des + ") "+
+                "values ("+
+                "'"+username+"', "
+                + "'"+des + "'" +" );" ;
+        Log.i("INSERT()",query);
+        try {
+            db.execSQL(query);
+            return true ;
+        }
+        catch (Exception e){
+            return false ;
+        }
 
-
+    }
+    public Cursor getALLpost(){
+        Cursor c = db.rawQuery("Select * From "+table_name_post,null );
+        return  c ;
+    }
+    public Cursor get_posts(String username){
+        Cursor c = db.rawQuery("Select * From "+table_name_post +" where "+row_post_username +"= '"+ username+"'",null );
+        return  c ;
+    }
         private class CustomSQLiteOpenHalper extends SQLiteOpenHelper {
         public CustomSQLiteOpenHalper(Context c){
             super(c,DB_name,null,DB_version);
@@ -137,10 +172,13 @@ public Boolean insertFollow(String follower , String follow){
                     row_pass + " text not null);";
             db.execSQL(new_table);
             db.execSQL(DATABASE_CREATE_follow);
+            db.execSQL(DATABASE_CREATE_Post);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL(DATABASE_CREATE_Post);
+            Log.i("DBMS ",DATABASE_CREATE_Post);
         }
     }
 
