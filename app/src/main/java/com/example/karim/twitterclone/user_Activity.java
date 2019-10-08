@@ -33,6 +33,7 @@ public class user_Activity extends AppCompatActivity {
     private DBMS dbms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        progressDialog = new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_);
         curerntUser = new CurerntUser();
@@ -100,7 +101,6 @@ public class user_Activity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.Loginout){
-            progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Logout");
             progressDialog.show();
             Intent intent = new Intent(user_Activity.this,MainActivity.class);
@@ -108,6 +108,22 @@ public class user_Activity extends AppCompatActivity {
             finish();
             return true;
         }
+        else
+        {
+            if (item.getItemId() == R.id.twites)
+            {
+                progressDialog.setTitle("post");
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                else
+                    progressDialog.show();
+
+                Intent intent = new Intent(user_Activity.this,Post_Activity.class);
+                startActivity(intent);
+                return true;
+            }
+        }
+
             return false;
         }
     public void show(Cursor c){
