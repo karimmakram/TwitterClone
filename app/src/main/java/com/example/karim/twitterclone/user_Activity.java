@@ -45,29 +45,40 @@ public class user_Activity extends AppCompatActivity {
         getalluser(dbms.getALL());
         Adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_checked,arrayList);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-
+        show(dbms.getALLFollowing());
+        show_u(dbms.getALL());
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CheckedTextView checkedTextView =(CheckedTextView) view;
-                if (checkedTextView.isChecked())
-                    FancyToast.makeText(user_Activity.this,"You Now Follow " +arrayList.get(position),Toast.LENGTH_SHORT,
-                            FancyToast.INFO,false).show();
+                if (checkedTextView.isChecked()) {
+                    FancyToast.makeText(user_Activity.this, "You Now Follow " + arrayList.get(position), Toast.LENGTH_SHORT,
+                            FancyToast.INFO, false).show();
+                    dbms.insertFollow(curerntUser.getUsername(),arrayList.get(position));
+
+                }
                 else
-                    FancyToast.makeText(user_Activity.this,arrayList.get(0)+" Un Follow Now" ,Toast.LENGTH_SHORT,
+                {
+                    if (dbms.unFollow(curerntUser.getUsername(),arrayList.get(position)))
+                    FancyToast.makeText(user_Activity.this,arrayList.get(position)+" Un Follow Now" ,Toast.LENGTH_SHORT,
                             FancyToast.INFO,false).show();
+
+
+                }
 
 
             }
         });
 
         listView.setAdapter(Adapter);
+        Checkeditem(dbms.getFollowing(curerntUser.getUsername()));
     }
 
     private void getalluser(Cursor c) {
         while (c.moveToNext()) {
             if (c.getString(2).equals(curerntUser.getUsername())) {
+                Log.i("araaaaa",curerntUser.getUsername());
 
             } else {
                 arrayList.add(c.getString(2));
@@ -101,9 +112,26 @@ public class user_Activity extends AppCompatActivity {
         }
     public void show(Cursor c){
         while (c.moveToNext()) {
-            arrayList.add(c.getString(2).toString());
-            Log.i(c.getString(0), c.getString(1) + "     " + c.getString(2));
+            Log.i("Follow",c.getString(0)+"  " +c.getString(1) + "     " + c.getString(2));
 
+        }
+        Log.i("Follow","no one");
+    }
+
+    public void show_u(Cursor c){
+        while (c.moveToNext()) {
+            Log.i("user",c.getString(0)+"  " +c.getString(1) + "     " + c.getString(2));
+
+        }
+        Log.i("Follow","no one");
+    }
+
+    public void Checkeditem(Cursor c){
+        while (c.moveToNext())
+        {
+            for (String Tuser:arrayList)
+                if (c.getString(2).equals(Tuser))
+                    listView.setItemChecked(arrayList.indexOf(Tuser),true);
         }
     }
 }
