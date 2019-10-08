@@ -7,5 +7,10 @@
         app:showAsAction="never"
         android:title="Login out"
         />
-
+    <item
+        android:id="@+id/twites"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_send_black_24dp"
+        android:title="" />
 </menu>
