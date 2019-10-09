@@ -1,11 +1,14 @@
 package com.example.karim.twitterclone;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +23,12 @@ public class Post_Activity extends AppCompatActivity {
     private CurerntUser user;
     private DBMS dbms ;
     boolean doubleBackToExitPressedOnce = false;
+    ProgressDialog progressDialog ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        getSupportActionBar().hide();
-
+        progressDialog = new ProgressDialog(this);
         des = findViewById(R.id.ET_twitte);
         send = findViewById(R.id.send);
         user =new CurerntUser();
@@ -52,20 +55,44 @@ public class Post_Activity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-        this.doubleBackToExitPressedOnce = true;
         Intent intent = new Intent(this,user_Activity.class);
         startActivity(intent);
 
-        new Handler().postDelayed(new Runnable() {
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.Loginout){
+            progressDialog.setTitle("Logout");
+            progressDialog.show();
+            Intent intent = new Intent(Post_Activity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else
+        {
+            if (item.getItemId() == R.id.user)
+            {
+                progressDialog.setTitle("other user");
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                else
+                    progressDialog.show();
+
+                Intent intent = new Intent(Post_Activity.this,user_Activity.class);
+                startActivity(intent);
+                return true;
             }
-        }, 2000);
+        }
+
+        return false;
     }
 }
