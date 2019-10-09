@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.icu.text.IDNA;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -150,4 +151,6 @@ public class user_Activity extends AppCompatActivity {
                     listView.setItemChecked(arrayList.indexOf(Tuser),true);
         }
     }
+
+
 }

@@ -13,4 +13,10 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_send_black_24dp"
         android:title="" />
+    <item
+        android:id="@+id/user"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_person_add"
+        android:title="" />
 </menu>
